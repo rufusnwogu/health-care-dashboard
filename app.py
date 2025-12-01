@@ -15,7 +15,7 @@ import plotly.io as pio
 # ----------------------------------------------
 @st.cache_data
 def load_data():
-    data_path = r"C:\Users\DELL\Documents\Health Care Dashboarb\Dataset\cleaned_hospital_data.csv"
+    data_path = "Dataset/cleaned_hospital_data.csv"
     df = pd.read_csv(data_path)
     return df
 data = load_data()
