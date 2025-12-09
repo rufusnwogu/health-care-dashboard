@@ -20,26 +20,16 @@ import pandas as pd
 
 
 @st.cache_data
-def load_data(path="Dataset/hospital_readmissions_cleaned.csv"):
+def load_data(path="Datasets/hospital_readmissions_cleaned.csv"):
+    """
+    Load the cleaned hospital readmissions dataset.
+    The cleaned version already includes:
+    - Feature engineering (age_mid, total_visits, procedure_intensity, medication_per_day)
+    - Encoded binary variables (change, diabetes_med)
+    - Encoded ordinal variables (glucose_test, A1Ctest)
+    - Encoded target variable (readmitted: 0=no, 1=yes)
+    """
     df = pd.read_csv(path)
-    
-    # Feature Engineering (from notebook)
-    # Convert age ranges to numeric midpoints
-    def age_to_mid(age_range):
-        """Convert an age range like '[70-80)' to a numeric midpoint (e.g., 75)."""
-        low, high = age_range.strip('[]()').split('-')
-        return int(round((int(low) + int(high)) / 2))
-    
-    df['age_mid'] = df['age'].apply(age_to_mid)
-    
-    # Handle target variable ('readmitted')
-    df['readmitted'] = df['readmitted'].map({'no': 0, 'yes': 1})
-    
-    # Create new engineered features
-    df['total_visits'] = df['n_outpatient'] + df['n_inpatient'] + df['n_emergency']
-    df['procedure_intensity'] = df['n_lab_procedures'] / (df['time_in_hospital'] + 1)
-    df['medication_per_day'] = df['n_medications'] / (df['time_in_hospital'] + 1)
-    
     return df
 
 # Load the data
