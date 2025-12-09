@@ -20,7 +20,7 @@ import pandas as pd
 
 
 @st.cache_data
-def load_data(path="Datasets/hospital_readmissions_cleaned.csv"):
+def load_data(path="Dataset/hospital_readmissions_cleaned.csv"):
     """
     Load the cleaned hospital readmissions dataset.
     The cleaned version already includes:
